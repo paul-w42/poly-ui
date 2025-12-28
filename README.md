@@ -37,22 +37,45 @@ To build your library:
 npm pack
 ```
 
-To create a production version of your showcase app:
+To create a production version of your showcase app (note - update the version number inside **package.json** if installing or elsewhere or publishing):
 
 ```sh
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
+To package the build output after executing **`npm run build`**:
 
 ```sh
-npm publish
+npm pack
 ```
+
+This packaged file can be copied to another project and installed there directly using the **`npm install`** command, i.e. **`npm install ui-elements-0.0.1.tgz`**. This will register the **ui-elements** package at verison **0.0.1** as installed in your application.
+
+To publish to npm after packaging the output:
+
+```sh
+npm publish --access=public
+```
+
+
+## Storybook
+
+Storybook is currently setup to test native svelte components, so what we see by executing storybook right now is a svelte component, not a custom element.
+
+Storybook can be configured to consume a custom element that has been built, but this does not support live code reloading (that I know of), and is a little slower in development.
+
+Run storybook via:
+
+```sh
+npm run storybook
+```
+
+This will start the storybook runtime and load a page in your browser that displays the storybook dashboard.  This window will contain a list of components on the left hand side that there are stories for, as well as a story for each component (there can be multiple) that has been included in that comopnents story file.
+
+See the **`./src/stories/Counter.stories.svelte`** file for an example of a stories file. 
+
+This stories file imports the svelte component from **`./src/lib/Counter.svelte`**, sets up a default meta object, and then below that contains four separate lines detailing four different instances of the component we would like to display, each instance using or exercising the component in a slightly different manner.
+
+[Storybook for Svelte tutorial](https://storybook.js.org/tutorials/intro-to-storybook/svelte/en/get-started/)
+
