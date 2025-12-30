@@ -31,11 +31,13 @@ Everything inside `src/lib` is part of your library, everything inside `src/rout
 
 ## Building
 
-To build your library:
+To test that you can build your library:
 
 ```sh
-npm pack
+npm pack --dry-run
 ```
+
+Execute w/o the option to build a usable package.
 
 To create a production version of your showcase app (note - update the version number inside **package.json** if installing or elsewhere or publishing):
 
