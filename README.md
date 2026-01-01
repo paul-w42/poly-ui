@@ -82,6 +82,11 @@ This stories file imports the svelte component from **`./src/lib/Counter.svelte`
 [Storybook for Svelte tutorial](https://storybook.js.org/tutorials/intro-to-storybook/svelte/en/get-started/)
 
 
+## Requirements for creating custom elements
+
+- there must have a **-** (dash) in the name, i.e. **my-element**
+- 
+
 
 ## Consuming application
 
