@@ -22,23 +22,18 @@
   button {
     font-family: inherit;
     font-size: inherit;
-    padding: 1em 2em;
-    color: #ffffff;
-    background-color: rgba(100, 163, 245, 0.979);
-    border-radius: 2em;
-    border: 2px solid #0011ff;
+    padding: 0.5em 1em;
+    color: black;
+    border-radius: 5px;
+    background-color: rgba(176, 202, 235, 0.979);
+    border: 2px solid #b5b7d8b9;
     outline: none;
-  width: 200px; 
     font-variant-numeric: tabular-nums;
     cursor: pointer;
   }
 
-  button:focus {
-    border: 2px solid #0011ff;
-  }
-
   button:hover {
-    border: 2px solid #5762f7b9;
+    border: 2px solid #0011f883;
   }
 </style>
 

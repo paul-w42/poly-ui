@@ -4,7 +4,12 @@
 // import './lib/Counter.svelte';
 
 // src/index.ts
+import './custom-elements.ts';
+
 import Counter from './lib/Counter.svelte';
 
-customElements.define('ui-counter', Counter);
+if (!customElements.get('ui-counter')) {
+  customElements.define('ui-counter', Counter);
+}
+
 

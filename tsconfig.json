@@ -14,7 +14,8 @@
 		"outDir": "dist",
 		"skipLibCheck": true,
 		"allowJs": false,
-		"checkJs": false
+		"checkJs": false,
+		"types": ["vite/client"],
 	},
 	"include": ["src", "src/**/*", "src/svelte.d.ts"],
 	"exclude": ["node_modules", "dist"]
