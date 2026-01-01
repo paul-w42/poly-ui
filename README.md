@@ -52,7 +52,7 @@ To package the build output after executing **`npm run build`**:
 npm pack
 ```
 
-This packaged file can be copied to another project and installed there directly using the **`npm install`** command, i.e. **`npm install ui-elements-0.0.1.tgz`**. This will register the **ui-elements** package at verison **0.0.1** as installed in your application.
+This packaged file can be copied to another project and installed there directly using the **`npm install`** command, i.e. **`npm install poly-ui-0.0.1.tgz`**. This will register the **poly-ui** package at verison **0.0.1** as installed in your application.
 
 To publish to npm after packaging the output:
 
@@ -80,4 +80,15 @@ See the **`./src/stories/Counter.stories.svelte`** file for an example of a stor
 This stories file imports the svelte component from **`./src/lib/Counter.svelte`**, sets up a default meta object, and then below that contains four separate lines detailing four different instances of the component we would like to display, each instance using or exercising the component in a slightly different manner.
 
 [Storybook for Svelte tutorial](https://storybook.js.org/tutorials/intro-to-storybook/svelte/en/get-started/)
+
+
+
+## Consuming application
+
+To make **`poly-ui`** components available to the largest namespace possible, import the library in an originating file, i.e. an index or main.tsx file.  For instance, you can import it in the top of a main.tsx file as:
+
+```ts
+  import 'poly-ui';
+  import 'poly-ui/types';
+```
 

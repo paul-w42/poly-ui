@@ -17,8 +17,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, './src/index.ts'),
-      name: 'ui-elements',
-      fileName: (format) => `ui-elements.${format}.js`,
+      name: 'poly-ui',
+      fileName: (format) => `poly-ui.${format}.js`,
       formats: ['es']
     },
     rollupOptions: {

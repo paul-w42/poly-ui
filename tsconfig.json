@@ -13,10 +13,9 @@
 		"emitDeclarationOnly": true,
 		"outDir": "dist",
 		"skipLibCheck": true,
-		"allowJs": true,
-		"checkJs": true
+		"allowJs": false,
+		"checkJs": false
 	},
-	// "include": ["src/**/*", "src/lib/*", "src/svelte-shims.d.ts"],
-	"include": ["src/**/*", "src/svelte-shims.d.ts"],
+	"include": ["src", "src/**/*", "src/svelte.d.ts"],
 	"exclude": ["node_modules", "dist"]
 }
