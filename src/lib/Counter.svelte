@@ -1,5 +1,11 @@
 <svelte:options
-  customElement="ui-counter"
+  customElement={{
+    tag: "ui-counter",
+    props: {
+      startCount: { attribute: 'start-count', type: 'Number'},
+      step: { attribute: 'step', type: 'Number'}
+    }
+  }}
 />
 
 <script lang="ts">

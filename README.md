@@ -85,7 +85,38 @@ This stories file imports the svelte component from **`./src/lib/Counter.svelte`
 ## Requirements for creating custom elements
 
 - there must have a **-** (dash) in the name, i.e. **my-element**
-- 
+  - use the **`svelte:options`** tag to define attribute names, see [Custom Elements](https://svelte.dev/docs/svelte/custom-elements) for more information
+  - defining the name 
+  - note the following example results in a prop 
+  
+```ts
+  <svelte:options
+    customElement={{
+      tag: "ui-counter",
+      props: {
+        // rename startCount to start-count when used in consuming app
+        startCount: { attribute: 'start-count', type: 'Number'},
+        // set 'step' to a type 'Number' vs default String typing
+        step: { attribute: 'step', type: 'Number'}
+      }
+    }}
+  />
+
+  <script lang="ts">
+    let {startCount = 0, step = 1} = $props();
+
+    let count: number = $derived(startCount)
+
+    const increment = () => {
+      count += step;
+    }
+  </script>
+
+  <button onclick={increment}>
+    count is {count}
+  </button>
+// ...
+```
 
 
 ## Consuming application

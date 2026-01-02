@@ -4,7 +4,7 @@
 // import './lib/Counter.svelte';
 
 // src/index.ts
-import './custom-elements.ts';
+import './custom-elements';
 
 import Counter from './lib/Counter.svelte';
 
