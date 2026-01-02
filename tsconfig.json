@@ -15,7 +15,7 @@
 		"skipLibCheck": true,
 		"allowJs": false,
 		"checkJs": false,
-		"types": ["vite/client"],
+		"types": ["vite/client"]
 	},
 	"include": ["src", "src/**/*", "src/svelte.d.ts"],
 	"exclude": ["node_modules", "dist"]

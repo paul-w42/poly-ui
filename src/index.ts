@@ -5,11 +5,5 @@
 
 // src/index.ts
 import './custom-elements';
-
-import Counter from './lib/Counter.svelte';
-
-if (!customElements.get('ui-counter')) {
-  customElements.define('ui-counter', Counter);
-}
-
+import './lib/Counter.svelte';
 
