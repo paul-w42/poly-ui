@@ -17,6 +17,7 @@
   "files": [
     "dist",
     "!dist/**/*.test.*",
+    "src/custom-elements.d.ts",
     "!dist/**/*.spec.*"
   ],
   "sideEffects": true,

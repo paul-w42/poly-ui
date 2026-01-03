@@ -4,6 +4,8 @@
 // import './lib/Counter.svelte';
 
 // src/index.ts
-import './custom-elements';
+// import './custom-elements';
+import type {} from './custom-elements';
+
 import './lib/Counter.svelte';
 

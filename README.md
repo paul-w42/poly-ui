@@ -84,9 +84,9 @@ This stories file imports the svelte component from **`./src/lib/Counter.svelte`
 
 ## Requirements for creating custom elements
 
-- there must have a **-** (dash) in the name, i.e. **my-element**
+- Custom Elements must have a **-** (dash) in the name, i.e. **my-element**
   - use the **`svelte:options`** tag to define attribute names, see [Custom Elements](https://svelte.dev/docs/svelte/custom-elements) for more information
-  - defining the name 
+  - define prop/attribute names, i.e. "startCount" to "start-count" 
   - note the following example results in a prop 
   
 ```ts
@@ -117,6 +117,8 @@ This stories file imports the svelte component from **`./src/lib/Counter.svelte`
   </button>
 // ...
 ```
+
+- must add an entry to **`src/
 
 
 ## Consuming application

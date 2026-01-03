@@ -17,6 +17,6 @@
 		"checkJs": false,
 		"types": ["vite/client"]
 	},
-	"include": ["src", "src/**/*", "src/svelte.d.ts"],
+	"include": ["src", "src/**/*", "src/**/*.d.ts"],
 	"exclude": ["node_modules", "dist"]
 }
