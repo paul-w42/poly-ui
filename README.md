@@ -119,7 +119,6 @@ To make **`poly-ui`** components available to the largest namespace possible, im
 
 ```ts
   import 'poly-ui';
-  import 'poly-ui/types';
 ```
 
 In our demo React application we also had to add a **poly-ui.d.ts** file in the **`src/`** directory with the following content:
