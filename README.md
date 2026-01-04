@@ -1,24 +1,10 @@
-# Svelte library
+# Poly-UI Custom Elements library
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
-
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
+This is a custom elements library that can in theory be used anywhere that supports html and javascript, this applies to web applications created with frameworks other than Svelte as long as they support custom elements.  This includes React 19+, Angular, Vue, and even plain html with javascript.
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Executing a development server:
 
 ```sh
 npm run dev
@@ -45,6 +31,7 @@ To create a production version of your showcase app (note - update the version n
 npm run build
 ```
 
+The build script includes a **`cp`** command to copy a types file into the output dist folder, this is to be used by a consuming client as to alleviate any linting or type errors during client development.
 
 To package the build output after executing **`npm run build`**:
 
@@ -84,11 +71,9 @@ This stories file imports the svelte component from **`./src/lib/Counter.svelte`
 
 ## Requirements for creating custom elements
 
-- Custom Elements must have a **-** (dash) in the name, i.e. **my-element**
-  - use the **`svelte:options`** tag to define attribute names, see [Custom Elements](https://svelte.dev/docs/svelte/custom-elements) for more information
-  - define prop/attribute names, i.e. "startCount" to "start-count" 
-  - note the following example results in a prop 
-  
+Example custom component, note the **`svelte:options`** element at the top that defines the custom element name as well as any name changes for its attributes as well as type definitions.
+
+
 ```ts
   <svelte:options
     customElement={{
@@ -118,8 +103,15 @@ This stories file imports the svelte component from **`./src/lib/Counter.svelte`
 // ...
 ```
 
-- must add an entry to **`src/
+See the [Svelte Custom Elements documentation](https://svelte.dev/docs/svelte/custom-elements) page for more information.
 
+
+- Custom Elements must have a **-** (dash) in the name, i.e. **my-element**
+  - use the **`svelte:options`** tag to define attribute names, see [Custom Elements](https://svelte.dev/docs/svelte/custom-elements) for more information
+- define camel-cased prop/attribute names, i.e. "startCount" to "start-count" 
+- must add an import entry to the **`src/index.ts`** file, i.e. for the **Counter** component the entry is: **`import './lib/Counter.svelte';`** 
+- must define the custom element by its registered name in two places inside the **`src/custom-elements.d.ts file`** to define its attribute/prop types. Use the registered attribute names to do this, i.e. **`start-count`** inside the **`Counter`** component, and not **`startCount`** which is used inside the Svelte code
+- valid property types in the **`svelte:options`** props object are 'String', 'Number', 'Boolean', 'Array', and 'Object'.
 
 ## Consuming application
 
@@ -130,3 +122,8 @@ To make **`poly-ui`** components available to the largest namespace possible, im
   import 'poly-ui/types';
 ```
 
+In our demo React application we also had to add a **poly-ui.d.ts** file in the **`src/`** directory with the following content:
+
+```ts
+  /// <reference types="poly-ui/types" />
+```
