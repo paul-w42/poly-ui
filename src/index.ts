@@ -4,4 +4,5 @@ import type {} from './custom-elements';
 
 // Import the component to register it as a custom element
 import './lib/Counter.svelte';
+import './lib/Button.svelte';
 
