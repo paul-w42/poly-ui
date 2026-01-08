@@ -35,3 +35,9 @@ copy:
 	@echo -e "Copying to $(DEST_DIR) ..."
 	@echo -e "--------------------------------------------${NC}\n"
 	cp -f $(PACKAGE_NAME)*.tgz $(DEST_DIR)
+
+sb:
+	@echo -e "\n${GREEN}--------------------------------------------"
+	@echo -e "Running Storybook ..."
+	@echo -e "--------------------------------------------${NC}\n"
+	npm run storybook

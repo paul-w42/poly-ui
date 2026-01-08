@@ -3,13 +3,14 @@
   customElement={{
     tag: 'ui-button',
     props: {
+      clickEvent: { attribute: 'click-event', type: 'String' },
+      disabled: { reflect: true, type: 'Boolean' },
+      icon: { type: 'String' },
+      iconPosition: { attribute: 'icon-position', type: 'String' },
       label: { reflect: true, type: 'String' },
       selected: { reflect: true, type: 'Boolean' },
-      variant: { reflect: true, type: 'String' },
       type: { reflect: true, type: 'String' },
-      iconPosition: { reflect: true, type: 'String' },
-      icon: { type: 'String' },
-      disabled: { reflect: true, type: 'Boolean' }
+      variant: { reflect: true, type: 'String' },
     }
   }}
 />
@@ -33,6 +34,7 @@
     type?: 'button' | 'submit' | 'reset';
     selected?: boolean;
     disabled?: boolean;
+    clickEventName?: string;
   }
 
   let {
@@ -51,7 +53,7 @@
     ...restProps
   }: ButtonProps = $props();
 
-  console.log('label: ' + label);
+  // console.log('label: ' + label);
 
   function handleClick(event: Event) {
     if (clickEvent) {
@@ -86,9 +88,9 @@
 
     if (css) classes.push(css);
 
-    console.log('classes: ' + classes);
-    console.log('css: ' + css);
-    console.log();
+    // console.log('classes: ' + classes);
+    // console.log('css: ' + css);
+    // console.log();
 
     return classes.join(' ');
   });
