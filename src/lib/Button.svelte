@@ -146,15 +146,15 @@
     color: black;
   }
 
-  .variant-default:hover {
+  .variant-default:hover, .variant-default:focus {
     background: #c4c9d1;
     border-color: #475569;
   }
 
-  .variant-default:focus {
+  /* .variant-default:focus {
     background: #94a3b8;
     border-color: #475569;
-  }
+  } */
 
   .variant-filled {
     background: #092068;

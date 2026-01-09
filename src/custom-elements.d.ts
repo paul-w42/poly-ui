@@ -1,4 +1,3 @@
-
 import type * as React from 'react';
 
 declare global {
@@ -12,6 +11,20 @@ declare global {
         'start-count'?: number;
         step?: number;
       };
+
+      'ui-button': React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement>,
+        HTMLElement
+      > & {
+        'click-event'?: string;
+        disabled?: boolean;
+        icon?: string;
+        'icon-position'?: 'left' | 'right' | 'iconOnly';
+        label?: string;
+        selected?: boolean;
+        type?: 'button' | 'submit' | 'reset';
+        variant?: 'default' | 'filled' | 'outline' | 'transparent';
+      };
     }
   }
 
@@ -19,23 +32,9 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       'ui-counter': any;
+      'ui-button': any;
     }
   }
 }
 
 export {};
-
-// Commented out and added above to allow (hopefully) proper linting inside consuming (React) apps
-// src/custom-elements.d.ts
-// declare global {
-//   namespace JSX {
-//     interface IntrinsicElements {
-//       'ui-counter': Partial<HTMLButtonElement> & {
-//         startCount?: number;
-//         step?: number;
-//       };
-//     }
-//   }
-// }
-
-// export {}
