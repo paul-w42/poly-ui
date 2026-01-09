@@ -78,3 +78,38 @@ export const VariantFilled: Story = {
 };
 
 
+export const CustomEventHandler: Story = {
+  name: 'with custom event handler',
+  render: (args) => {
+    let left = true;
+
+    const container = document.createElement('div');
+
+    const button = document.createElement('ui-button') as any;
+    button.label = args.label || 'Click with handler';
+    button.setAttribute('click-event', 'custom-button-clicked');
+
+    // Create the message element once
+    const message = document.createElement('p');
+    message.style.color = 'green';
+    message.textContent = 'Click the button to trigger the event';
+
+    // Attach a custom event listener
+    container.addEventListener('custom-button-clicked', (e) => {
+      message.textContent = left
+        ? '✅ Custom event received!'
+        : 'Custom event received! ✅';
+
+      // console.log('Custom event triggered:', e);
+      left = !left;
+    });
+
+    container.appendChild(button);
+    container.appendChild(message);
+
+    return container;
+  },
+  args: {
+    label: 'Click with handler',
+  },
+};
