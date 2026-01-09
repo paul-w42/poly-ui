@@ -147,13 +147,13 @@
   }
 
   .variant-default:hover {
-    background: #94a3b8;
+    background: #c4c9d1;
     border-color: #475569;
   }
 
-  .variant-default.selected {
-    background: #6b7280;
-    color: white;
+  .variant-default:focus {
+    background: #94a3b8;
+    border-color: #475569;
   }
 
   .variant-filled {
