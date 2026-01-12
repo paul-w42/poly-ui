@@ -17,6 +17,7 @@ declare global {
         HTMLElement
       > & {
         'click-event'?: string;
+        css?: string;
         disabled?: boolean;
         icon?: string;
         'icon-position'?: 'left' | 'right' | 'iconOnly';

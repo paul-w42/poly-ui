@@ -4,7 +4,7 @@ import check from './assets/check.svg';
 // Ensure the custom element is registered
 // import '../lib/button.js';
 
-interface ButtonArgs {
+interface CardArgs {
   label?: string;
   variant?: string;
   icon?: string;
@@ -12,9 +12,9 @@ interface ButtonArgs {
   css?: string;
 }
 
-const meta: Meta<ButtonArgs> = {
-  title: 'poly-ui/Button',
-  component: 'ui-button',
+const meta: Meta<CardArgs> = {
+  title: 'poly-ui/Card',
+  component: 'ui-card',
   argTypes: {
     label: { control: 'text' },
     variant: { control: 'text' },
@@ -40,7 +40,7 @@ const meta: Meta<ButtonArgs> = {
 
 export default meta;
 
-type Story = StoryObj<ButtonArgs>;
+type Story = StoryObj<CardArgs>;
 
 export const Default: Story = {
   args: {
@@ -113,4 +113,3 @@ export const CustomEventHandler: Story = {
     label: 'Click with handler',
   },
 };
-

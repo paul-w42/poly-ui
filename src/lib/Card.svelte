@@ -1,53 +1,46 @@
-
+<!-- 
 <svelte:options
   customElement={{
-    tag: 'ui-button',
+    tag: 'ui-card',
     props: {
       clickEvent: { attribute: 'click-event', type: 'String' },
-      clickHandler: { attribute: 'click-handler', type: 'Object' },
-      disabled: { reflect: true, type: 'Boolean' },
-      icon: { type: 'String' },
-      iconPosition: { attribute: 'icon-position', type: 'String' },
-      label: { reflect: true, type: 'String' },
-      selected: { reflect: true, type: 'Boolean' },
-      type: { reflect: true, type: 'String' },
+      cssImage: { attribute: 'css-image', type: 'String' },
+      imageURL: { attribute: 'image-url', type: 'String'},
+      inset: { type: 'Boolean' },
       variant: { reflect: true, type: 'String' },
     }
   }}
 />
 
 <script lang="ts">
-  import type { HTMLButtonAttributes } from 'svelte/elements';
+  // import type { HTMLAttributes } from 'svelte/elements';
   import type { Snippet } from 'svelte';
 
   type VariantKey = 'default' | 'filled' | 'outline' | 'transparent';
 
-  interface ButtonProps extends HTMLButtonAttributes {
+  interface CardProps {
+    children?: Snippet;
     css?: string;
     cssImage?: string;
-    label?: string;
     clickEvent?: string;
-    icon?: string;
-    iconPosition?: 'left' | 'right' | 'iconOnly';
-    variant?: VariantKey;
-    type?: 'button' | 'submit' | 'reset';
-    selected?: boolean;
-    disabled?: boolean;
-    clickEventName?: string;
+    imageURL?: string;
+    inset?: boolean;
+    variant?: string;
+    // clickHandler?: (e:Event) => void;
   }
 
   let {
+    children,
     clickEvent,
     css,
     cssImage,
-    icon,
-    iconPosition,
+    imageURL,
+    inset = false,
     variant = 'default',
-    type = 'button',
-    selected = false,
-    disabled = false,
     ...restProps
-  }: ButtonProps = $props();
+  }: CardProps = $props();
+
+  // console.log('label: ' + label);
 
   function handleClick(event: Event) {
     if (clickEvent) {
@@ -58,6 +51,7 @@
       );
     }
 
+    // if (clickHandler) clickHandler(event);
   }
 
   function handleKey(event: KeyboardEvent) {
@@ -81,6 +75,10 @@
 
     if (css) classes.push(css);
 
+    // console.log('classes: ' + classes);
+    // console.log('css: ' + css);
+    // console.log();
+
     return classes.join(' ');
   });
 
@@ -103,7 +101,7 @@
     <img src={icon} alt="" class="icon" style={cssImage} />
   {/if}
 
-  <slot/>
+  <slot>{label}</slot>
 
   {#if icon && iconPosition === 'right'}
     <img src={icon} alt="" class="icon icon-right" style={cssImage} />
@@ -192,4 +190,4 @@
     padding-right: 0.75rem;
   }
 </style>
-
+ -->
