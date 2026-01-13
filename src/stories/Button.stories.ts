@@ -113,3 +113,4 @@ export const CustomEventHandler: Story = {
     label: 'Click with handler',
   },
 };
+

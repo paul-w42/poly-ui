@@ -4,6 +4,7 @@
     tag: 'ui-button',
     props: {
       clickEvent: { attribute: 'click-event', type: 'String' },
+      clickHandler: { attribute: 'click-handler', type: 'Object' },
       disabled: { reflect: true, type: 'Boolean' },
       icon: { type: 'String' },
       iconPosition: { attribute: 'icon-position', type: 'String' },
@@ -22,12 +23,10 @@
   type VariantKey = 'default' | 'filled' | 'outline' | 'transparent';
 
   interface ButtonProps extends HTMLButtonAttributes {
-    children?: Snippet;
     css?: string;
     cssImage?: string;
     label?: string;
     clickEvent?: string;
-    clickHandler?: (e:Event) => void;
     icon?: string;
     iconPosition?: 'left' | 'right' | 'iconOnly';
     variant?: VariantKey;
@@ -38,10 +37,7 @@
   }
 
   let {
-    label,
-    children,
     clickEvent,
-    clickHandler,
     css,
     cssImage,
     icon,
@@ -53,8 +49,6 @@
     ...restProps
   }: ButtonProps = $props();
 
-  // console.log('label: ' + label);
-
   function handleClick(event: Event) {
     if (clickEvent) {
       $host().dispatchEvent(
@@ -64,7 +58,6 @@
       );
     }
 
-    if (clickHandler) clickHandler(event);
   }
 
   function handleKey(event: KeyboardEvent) {
@@ -88,10 +81,6 @@
 
     if (css) classes.push(css);
 
-    // console.log('classes: ' + classes);
-    // console.log('css: ' + css);
-    // console.log();
-
     return classes.join(' ');
   });
 
@@ -114,7 +103,7 @@
     <img src={icon} alt="" class="icon" style={cssImage} />
   {/if}
 
-  <slot>{label}</slot>
+  <slot/>
 
   {#if icon && iconPosition === 'right'}
     <img src={icon} alt="" class="icon icon-right" style={cssImage} />
