@@ -5,7 +5,7 @@ import check from './assets/check.svg';
 // import '../lib/button.js';
 
 interface ButtonArgs {
-  label?: string;
+  // label?: string;
   variant?: string;
   icon?: string;
   iconPosition?: 'left' | 'right';
@@ -16,7 +16,7 @@ const meta: Meta<ButtonArgs> = {
   title: 'poly-ui/Button',
   component: 'ui-button',
   argTypes: {
-    label: { control: 'text' },
+    // label: { control: 'text' },
     variant: { control: 'text' },
     icon: { control: 'text' },
     iconPosition: {
@@ -28,7 +28,7 @@ const meta: Meta<ButtonArgs> = {
   render: (args) => {
     const el = document.createElement('ui-button') as any;
 
-    if (args.label) el.label = args.label;
+    // if (args.label) el.label = args.label;
     if (args.variant) el.variant = args.variant;
     if (args.icon) el.icon = args.icon;
     if (args.iconPosition) el.iconPosition = args.iconPosition;
@@ -43,9 +43,11 @@ export default meta;
 type Story = StoryObj<ButtonArgs>;
 
 export const Default: Story = {
-  args: {
-    label: 'Click me',
-  },
+  render: () => `
+    <ui-button>
+      Click Me
+    </ui-button>
+  `,
 };
 
 
@@ -61,20 +63,26 @@ export const CssRedWithSlot: Story = {
 
 export const CustomIcon: Story = {
   name: 'custom icon',
-  args: {
-    label: 'Confirm!',
-    icon: check,
-    iconPosition: 'right',
-  },
+  render: () => `
+    <ui-button icon='./assets/check.svg' icon-position="right">
+      Click Me
+    </ui-button>
+  `,
+  // args: {
+  //   label: 'Confirm!',
+  //   icon: check,
+  //   iconPosition: 'right',
+  // },
 };
 
 
 export const VariantFilled: Story = {
-  name: 'variant filled',
-  args: {
-    label: 'Filled Variant',
-    variant: 'filled',
-  },
+  name: 'variant filled',  
+  render: () => `
+    <ui-button css="border: 2px solid red;" variang="filled">
+      Filled Variant
+    </ui-button>
+  `,
 };
 
 
@@ -86,7 +94,8 @@ export const CustomEventHandler: Story = {
     const container = document.createElement('div');
 
     const button = document.createElement('ui-button') as any;
-    button.label = args.label || 'Click with handler';
+    button.text = 'Click with Handler';
+    // button.label = args.label || 'Click with handler';
     button.setAttribute('click-event', 'custom-button-clicked');
 
     // Create the message element once
@@ -109,8 +118,8 @@ export const CustomEventHandler: Story = {
 
     return container;
   },
-  args: {
-    label: 'Click with handler',
-  },
+  // args: {
+  //   label: 'Click with handler',
+  // },
 };
 
