@@ -35,19 +35,25 @@
   ]);
 
   const SUPPORT_LANGUAGES = new Set([
-    'docker', 'dockerfile', 'nginx', 'ocaml', 'xml-doc', 'yaml',
+    'docker', 'dockerfile', 'nginx', 'ocaml', 'xml-doc', 'yaml', 
     'yml', 'xquery', 'markdown', 'md', 'markup-templating', 'systemd',
-    'sql', 'json5', 'json', 'webmanifest', 'sass', 'scss', 'graphql'
+    'sql', 'json5', 'json', 'webmanifest', 'sass', 'scss', 'graphql',
+    'markup', 'html', 'xml', 'svg', 'mathml', 'ssml', 'atom', 'rss', 'css'
   ]);
 
   const MISC_LANGUAGES = new Set([
     'wasm', 'python', 'py', 'basic', 'eiffel', 'elixir', 'elm', 'erlang',
-    'fsharp', 'visual-basic', 'vb', 'vba', 'typescript', 'ts', 'git'
+    'fsharp', 'visual-basic', 'vb', 'vba', 'typescript', 'ts', 'git',
+    'javascript', 'js', 'clike'
   ]);
 
   const COMP_LANGUAGES = new Set([
     'r', 'rust', 'clojure', 'mongodb', 'c', 'cpp', 'd', 'zig'
   ]);
+  
+  const TSX_LANGUAGES = new Set([
+    'jsx', 'tsx'
+  ])
 
   const jsModules = import.meta.glob('./libs/*.js');
   const cssThemes = import.meta.glob('./libs/*.css', {
@@ -67,9 +73,9 @@
     if (SUPPORT_LANGUAGES.has(language)) return 'prism-support.js';
     if (MISC_LANGUAGES.has(language)) return 'prism-misc.js';
     if (COMP_LANGUAGES.has(language)) return 'prism-comp.js';
-    return 'prism.js';
+    if (TSX_LANGUAGES.has(language)) return 'prism-tsx.js';       // react jsx or tsx
+    return 'prism-misc.js'; // Fallback to misc which contains JS/TS/Clike
   }
-
   $effect(() => {
     const host = $host();
 
