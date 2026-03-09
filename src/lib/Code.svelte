@@ -1,44 +1,144 @@
-
 <svelte:options
   customElement={{
     tag: 'ui-code-highlight'
   }}
 />
-
-
 <script lang="ts">
-  // @ts-ignore
-  import Prism from './libs/prism.js';
-  import './libs/prism.css';
-
   interface CodeProps {
-    // code: string;
     language?: string;
+    theme?: 'default' | 'coy' | 'dark' | 'okaidia' | 'solarized' | 'tomorrow' | 'twilight';
     css?: string;
   }
 
-  let { 
-    // code, 
-    language = 'typescript', /* javascript typescript jsx tsx shell webassembly json xml */
-    css = '' 
-  }:CodeProps = $props();
+  let {
+    language = 'typescript',
+    theme = 'default',
+    css = ''
+  }: CodeProps = $props();
 
-  let codeEl: HTMLElement;
+  let prismInstance = $state<any>(null);
+  let source = $state('');
+  let highlighted = $state('');
+  let themeCss = $state('');
 
-  // Re-run Prism whenever code or language changes
+
+  const SERVER_LANGUAGES = new Set([
+    'go', 'http', 'aspnet', 'java', 'ruby', 'rb', 'kotlin', 'kt', 'kts',
+    'go-module', 'go-mod', 'csharp', 'cs', 'dotnet', 'vbnet', 'php',
+    'phpdoc', 'php-extras', 'javadoc', 'javadoclike'
+  ]);
+
+  const EARLY_LANGUAGES = new Set([
+    'ada', 'haskell', 'hs', 'plsql', 'powershell', 'smalltalk', 'cobol',
+    'lua', 'lisp', 'emacs', 'elisp', 'emacs-lisp', 'matlab', 'tcl',
+    'fortran', 'pascal', 'objectpascal', 'verilog', 'perl'
+  ]);
+
+  const SUPPORT_LANGUAGES = new Set([
+    'docker', 'dockerfile', 'nginx', 'ocaml', 'xml-doc', 'yaml',
+    'yml', 'xquery', 'markdown', 'md', 'markup-templating', 'systemd',
+    'sql', 'json5', 'json', 'webmanifest', 'sass', 'scss', 'graphql'
+  ]);
+
+  const MISC_LANGUAGES = new Set([
+    'wasm', 'python', 'py', 'basic', 'eiffel', 'elixir', 'elm', 'erlang',
+    'fsharp', 'visual-basic', 'vb', 'vba', 'typescript', 'ts', 'git'
+  ]);
+
+  const COMP_LANGUAGES = new Set([
+    'r', 'rust', 'clojure', 'mongodb', 'c', 'cpp', 'd', 'zig'
+  ]);
+
+  const jsModules = import.meta.glob('./libs/*.js');
+  const cssThemes = import.meta.glob('./libs/*.css', {
+    query: '?raw',
+    import: 'default'
+  });
+
+  function getLightDomText(host: HTMLElement) {
+    return Array.from(host.childNodes)
+      .map((node) => node.textContent ?? '')
+      .join('');
+  }
+
+  function getLibName(language: string) {
+    if (SERVER_LANGUAGES.has(language)) return 'prism-web.js';
+    if (EARLY_LANGUAGES.has(language)) return 'prism-early.js';
+    if (SUPPORT_LANGUAGES.has(language)) return 'prism-support.js';
+    if (MISC_LANGUAGES.has(language)) return 'prism-misc.js';
+    if (COMP_LANGUAGES.has(language)) return 'prism-comp.js';
+    return 'prism.js';
+  }
+
   $effect(() => {
-    if (codeEl) {
-      Prism.highlightElement(codeEl);
+    const host = $host();
+
+    const update = () => {
+      source = getLightDomText(host);
+    };
+
+    queueMicrotask(update);
+
+    const observer = new MutationObserver(() => update());
+
+    observer.observe(host, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
+
+    return () => observer.disconnect();
+  });
+
+  $effect(() => {
+    const libName = getLibName(language);
+    const jsKey = `./libs/${libName}`;
+    const cssKey = `./libs/prism-${theme}.css`;
+
+    const loadJs = jsModules[jsKey];
+    const loadThemeCss = cssThemes[cssKey];
+
+    if (!loadJs) {
+      console.error(`Missing Prism JS file: ${jsKey}`);
+      return;
     }
+
+    if (!loadThemeCss) {
+      console.error(`Missing Prism CSS file: ${cssKey}`);
+      return;
+    }
+
+    loadThemeCss()  
+      .then((cssText) => {
+        themeCss = cssText as string;
+      })
+      .catch((err) => {
+        console.error('Failed to load Prism CSS:', err);
+      });
+
+    loadJs()
+      .then((module: any) => {
+        prismInstance = (window as any).Prism || module.default || module;
+      })
+      .catch((err) => {
+        console.error('Failed to load Prism bundle:', err);
+      });
+  });
+
+  $effect(() => {
+    if (!prismInstance) return;
+
+    const grammar =
+      prismInstance.languages[language] ??
+      prismInstance.languages.typescript ??
+      prismInstance.languages.plain;
+
+    highlighted = prismInstance.highlight(source, grammar, language);
   });
 </script>
 
-<pre>
-  <code
-    bind:this={codeEl}
-    class={"language-" + language}
-    style={css}
-  >
-    <slot />
-  </code>
-</pre>
+{#if themeCss}
+  {@html `<style>${themeCss}</style>`}
+{/if}
+
+<pre class={"language-" + language}><code class={"language-" + language} style={css}>{@html highlighted}</code></pre>

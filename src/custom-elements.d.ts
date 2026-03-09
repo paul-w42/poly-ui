@@ -26,6 +26,15 @@ declare global {
         type?: 'button' | 'submit' | 'reset';
         variant?: 'default' | 'filled' | 'outline' | 'transparent';
       };
+
+      'ui-code-highlight': React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement>,
+        HTMLElement
+      > & {
+        language?: string;
+        theme?: 'default' | 'coy' | 'dark' | 'okaidia' | 'solarized' | 'tomorrow' | 'twilight';
+        css?: string;
+      };
     }
   }
 
@@ -34,6 +43,7 @@ declare global {
     interface IntrinsicElements {
       'ui-counter': any;
       'ui-button': any;
+      'ui-code-highlight': any;
     }
   }
 }
